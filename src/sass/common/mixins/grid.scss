@@ -1,0 +1,113 @@
+//Grid system
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin make-grid-columns($i: 1, $list: ".col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}") {
+  @for $i from (1 + 1) through 12 {
+    $list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+  }
+  #{$list} {
+    position: relative;
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+    // Inner gutter via padding
+    padding-left:  ceil((30px / 2));
+    padding-right: floor((30px / 2));
+  }
+}
+
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin float-grid-columns($class, $i: 1, $list: ".col-#{$class}-#{$i}") {
+  @for $i from (1 + 1) through 12 {
+    $list: "#{$list}, .col-#{$class}-#{$i}";
+  }
+  #{$list} {
+    float: left;
+  }
+}
+
+
+@mixin calc-grid-column($index, $class, $type) {
+  @if ($type == width) and ($index > 0) {
+    .col-#{$class}-#{$index} {
+      width: percentage(($index / 12));
+    }
+  }
+  @if ($type == push) and ($index > 0) {
+    .col-#{$class}-push-#{$index} {
+      left: percentage(($index / 12));
+    }
+  }
+  @if ($type == push) and ($index == 0) {
+    .col-#{$class}-push-0 {
+      left: auto;
+    }
+  }
+  @if ($type == pull) and ($index > 0) {
+    .col-#{$class}-pull-#{$index} {
+      right: percentage(($index / 12));
+    }
+  }
+  @if ($type == pull) and ($index == 0) {
+    .col-#{$class}-pull-0 {
+      right: auto;
+    }
+  }
+  @if ($type == offset) {
+    .col-#{$class}-offset-#{$index} {
+      margin-left: percentage(($index / 12));
+    }
+  }
+}
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin loop-grid-columns($columns, $class, $type) {
+  @for $i from 0 through $columns {
+    @include calc-grid-column($i, $class, $type);
+  }
+}
+
+
+// Create grid for specific class
+@mixin make-grid($class) {
+  @include float-grid-columns($class);
+  @include loop-grid-columns(12, $class, width);
+  @include loop-grid-columns(12, $class, pull);
+  @include loop-grid-columns(12, $class, push);
+  @include loop-grid-columns(12, $class, offset);
+}
+// Grid system
+
+// Creates a wrapper for a series of columns
+@mixin make-row($gutter: 30px) {
+  margin-left:  ceil(($gutter / -2));
+  margin-right: floor(($gutter / -2));
+  @include clearfix;
+}
+
+// Generate the medium columns
+@mixin make-column($columns, $gutter: 30px) {
+  position: relative;
+  min-height: 1px;
+  padding-left:  ($gutter / 2);
+  padding-right: ($gutter / 2);
+
+  @include media-query-for-width-pad() {
+    @media only sreen and (orientation: landscape){
+      float: left;
+      width: percentage(($columns / 12));
+    }
+  }
+  @include media-query-for-pc() {
+    float: left;
+    width: percentage(($columns / 12));
+  }
+}
+@mixin make-column-offset($columns) {
+  margin-left: percentage(($columns / 12));
+}
+@mixin make-column-push($columns) {
+    left: percentage(($columns / 12));
+}
+@mixin make-column-pull($columns) {
+    right: percentage(($columns / 12));
+}

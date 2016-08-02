@@ -1,0 +1,47 @@
+//
+// Panels
+// --------------------------------------------------
+
+
+// Base class
+.panel {
+  margin-bottom: 20px;
+  background-color: $panel-bg;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  @include box-shadow(0 1px 1px rgba(0,0,0,.05));
+}
+
+// Panel contents
+.panel-body {
+  padding: $panel-body-padding;
+  @include clearfix;
+}
+
+// Optional heading
+.panel-heading {
+  padding: $panel-heading-padding;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+// Within heading, strip any `h*` tag of its default margins for spacing.
+.panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: ceil((13 * 1.125));
+  color: inherit;
+
+  > a,
+  > small,
+  > .small,
+  > small > a,
+  > .small > a {
+    color: inherit;
+  }
+}
+// Contextual variations
+.panel-default {
+  @include panel-variant($panel-default-border, $panel-default-text, $panel-default-heading-bg, $panel-default-border);
+}

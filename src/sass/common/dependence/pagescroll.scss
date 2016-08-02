@@ -1,0 +1,55 @@
+@include media-query-for-phone(){
+    .android{
+        .bar{
+            
+            position:fixed !important;
+            display:block;/*for uc bug*/
+        }
+        .page-on-center{
+            display:block;
+            @include transform(none !important);
+        }
+        
+        .pages,.page{
+            overflow:visible !important;
+            height:100%;
+        }
+        
+        
+        .page>.page-content{
+            overflow:visible !important;
+            height:auto;
+            min-height: 100%;
+        }
+
+        .fixed.page-on-center[data-blend]>.page-content,.fixed .page-on-center[data-blend]>.page-content{
+            overflow: hidden !important;
+            height: 100%;
+        }
+        .plugin-inited{
+            display:none;
+        }
+        .plugin-inited.plugin-show{
+            display:block;
+            @include transform(none !important);
+
+            position: fixed;
+        }
+        .plugin-inited.page-transitioning{
+            display:block;
+        }
+    }
+}
+
+.plugin-inited {
+    display:none;
+    &.page-transitioning,&.plugin-show{
+        display:block;
+    }
+    .bar{
+        z-index: 10010;
+    }
+    .page-content{
+        z-index: 10005;
+    }
+}

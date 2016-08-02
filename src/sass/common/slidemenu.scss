@@ -1,0 +1,81 @@
+#slideMenu {
+  display: none;
+}
+
+#slideMenu ul {
+  padding: 0;
+}
+
+#slideMenu.nav .nav-view{
+  padding-top: 44px;
+  width: 270px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  line-height: 1.2;
+  color: #fff;
+  background-color: #E65749;
+  z-index: 1202;
+  a:hover {
+    color: rgba(128,128,128,1);
+  }
+  .table-view-cell {
+    &, &:last-child {
+      border-bottom: 1px solid #EAEAEA;
+    }
+  }
+
+}
+
+#slideMenu.nav {
+  background-color: transparent;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  //width: 100%;
+  width: 270px;
+  height: 100%;
+  z-index: 1200;
+}
+
+.animation {
+  @include transition(all .3s ease-in-out);
+}
+
+.page-animation {
+  @include transition(all 0s ease-in-out);
+}
+
+
+.page-menu-animation {
+  @include transform(translateX(270px));
+  overflow: hidden;
+}
+
+#slideMenu.nav-position .nav-view {
+  @include transform(translate3d(0, 0, 0));
+  @include box-shadow(inset -1px 0 10px rgba(40, 40, 40, 0.5));
+}
+
+.mask {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.15);
+  z-index: 1201;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+.page-content {
+  z-index: 1200;
+}
+
+@include media-query-for-phone() {
+  #slideMenu {
+    display: block;
+  }
+}

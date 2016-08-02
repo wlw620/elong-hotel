@@ -1,0 +1,121 @@
+@import "./mixins.scss";
+
+.promotion-ad-mask {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    z-index: 10100;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.8);
+
+    .promotion-ad-picWrapper {
+	    position: relative;
+	    width: 100%;
+	    height: 100%;
+	    display: -webkit-box;
+	    -webkit-box-align: center;
+	    -webkit-box-pack: center;
+
+	    .promotion-ad-bannerPic {
+    	    display: block;
+		    position: relative;
+		    //max-width: 100%;
+		    max-height: 75%;
+		    max-width: 90%;
+
+		    .promotion-ad-close {
+		        width: 24px;
+			    height: 24px;
+			    border-radius: 100%;
+			    border: 1px solid rgb(255, 255, 255);
+			    text-align: center;
+			    display: block;
+			    line-height: 20px;
+			    font-size: 20px;
+			    color: rgb(255, 255, 255);
+			    position: absolute;
+			    right: 0px;
+			    top: -36px;
+		    }
+		    img {
+		    	max-width: 100%;
+		    }
+	    }
+    }
+}
+.egg-animation {
+	// @include transform(translate3d(0, 400px, 0));
+	@include animation(promotionzoomIn 0.6s 0.2s linear);
+}
+.promotion-egg-wrap {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left:0;top: 0;
+	z-index: 99999;
+	background: transparent;
+}
+.promotion-egg-pic {
+	position: fixed;
+	top: -50px;
+	pointer-events: none;
+	user-select: none;
+	width: 25px;
+	opacity: 0.2;
+	@include transition(all 3s linear);
+
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+@-webkit-keyframes promotionzoomIn {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale3d(.3, .3, .3);
+		transform: scale3d(.3, .3, .3);
+	}
+
+	10% {
+		opacity: 1;
+	}
+
+	95% {
+		opacity: 1;
+		-webkit-transform: scale3d(1, 1, 1);
+		transform: scale3d(1, 1, 1);
+	}
+
+	100% {
+		transform: translate3d(0,700px,0);
+		opacity: 0;
+	}
+}
+
+@keyframes promotionzoomIn {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale3d(.3, .3, .3) translate3d(0,0,0);
+		transform: scale3d(.3, .3, .3) translate3d(0,0,0);
+	}
+
+	10% {
+		opacity: 0.5;
+		-webkit-transform:scale3d(.8, .8, .8) translate3d(0,70px,0);
+		transform:scale3d(.8, .8, .8) translate3d(0,70px,0);
+	}
+
+	95% {
+		opacity: 1;
+		-webkit-transform: scale3d(.6, .6, .6) translate3d(0,665px,0);
+		transform: scale3d(1, 1, 1) translate3d(0,665px,0);
+	}
+
+	100% {
+		-webkit-transform: scale3d(1, 1, 1) translate3d(0,700px,0);
+		transform: scale3d(1, 1, 1) translate3d(0,700px,0);
+		opacity: 0;
+	}
+}

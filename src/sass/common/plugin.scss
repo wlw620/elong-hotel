@@ -1,0 +1,15 @@
+.page-plugin{
+	position: absolute;
+}
+.low-device{
+	.page-plugin {
+		height: 100%;
+	}	
+}
+
+.plugin-inited {
+	z-index: 10005;
+	.bar{
+		z-index: 10010;
+	}
+}
